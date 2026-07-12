@@ -11,7 +11,8 @@ export const Add = function ({inactivateAddButton}) {
     const addTodo =async function(title,description){
     const authToken=localStorage.getItem("authToken")
     try {
-        const response = await fetch("http://localhost:3000/addTodo",{
+        // const response = await fetch("http://localhost:3000/addTodo",{
+        const response = await fetch("https://tidy-todos.onrender.com/addTodo",{
             method:"POST",
             headers:{
                 "Content-Type": "application/json",

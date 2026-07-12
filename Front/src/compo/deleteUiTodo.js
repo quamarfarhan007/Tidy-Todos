@@ -8,7 +8,8 @@ export const deleteUiTodo =async function(todoId,triggerRefresh){
     // const {triggerRefresh}=useContext(RefreshContext)
 
     try {
-        const response = await fetch("http://localhost:3000/deleteTodo",{
+        // const response = await fetch("http://localhost:3000/deleteTodo",{
+        const response = await fetch("https://tidy-todos.onrender.com/deleteTodo",{
             method:"POST",
             headers:{
                 "Content-Type": "application/json",

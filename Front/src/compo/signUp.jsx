@@ -12,7 +12,8 @@ export const SignUp = function (){
 
     const sendreq = async()=>{
         const packet = {email,password}
-        const responce =await fetch("http://localhost:3000/signup",
+        // const responce =await fetch("http://localhost:3000/signup",
+        const responce =await fetch("https://tidy-todos.onrender.com/signup",
             {
                 method:"POST",
                 headers:{"Content-Type":"application/json"},
