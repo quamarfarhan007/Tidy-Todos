@@ -33,7 +33,7 @@ export const AllTodos = function () {
 function SuballTodosUI({title,description,todoId,triggerRefresh}){
     return <div className="relative flex flex-col items-center h-full w-full bg-[#FFBF00] rounded-xl px-2 py-2 pb-8 break-all">
         <input type="checkbox"
-        className="absolute bottom-2 left-2 w-5 h-5 cursor-pointer accent-green-200"
+        className="absolute bottom-2 left-2 w-5 h-5 cursor-pointer accent-green-400"
         onChange={()=>{deleteUiTodo(todoId,triggerRefresh)}} />
         <div className="font-semibold">{title}</div>
 
