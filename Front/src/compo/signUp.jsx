@@ -1,5 +1,6 @@
 import { Link , useNavigate} from "react-router-dom"
-import {useRef,useState} from "react"
+import {useState} from "react"
+import { BACKEND_URL } from "../config"
 
 
 export const SignUp = function (){
@@ -12,8 +13,8 @@ export const SignUp = function (){
 
     const sendreq = async()=>{
         const packet = {email,password}
-        // const responce =await fetch("http://localhost:3000/signup",
-        const responce =await fetch("https://tidy-todos.onrender.com/signup",
+
+        const responce =await fetch(`${BACKEND_URL}/signup`,
             {
                 method:"POST",
                 headers:{"Content-Type":"application/json"},
@@ -21,12 +22,24 @@ export const SignUp = function (){
         })
         console.log(responce)
         if (responce.ok){
+            alert("User Created Successfully");
             navigate("/login")
-        }else {
-            const errorData= await responce.json()
-            alert(JSON.stringify(errorData.errors))}
+            return 
+        }
+        const errorData= await responce.json()
+        // 2. Check if it's a standard backend message (like "User already exists")
+        if (errorData.message) {
+            alert(errorData.message);
+        } 
+        else if (errorData.errors) {
+            alert("Invalid input: " + JSON.stringify(errorData.errors));
+        
+        } 
+        // 3. Fallback just in case something totally unexpected happens
+        else {
+            alert("An unknown error occurred.");
+        }
     }
-
 
     return <div className="flex justify-center items-center bg-[#2B5748] h-screen ">
         <div className="flex flex-col  items-center w-60 h-[400px] rounded-xl shadow-xl shadow-black bg-red-100 " >
@@ -54,7 +67,7 @@ export const SignUp = function (){
 
             <button onClick={sendreq} className="bg-blue-400 rounded-xl px-4 py-1 shadow-xl hover:shadow-blue-300"   >Sign UP</button>
             <br />
-            <p onClick={sendreq} className=""   >Already a user?</p>
+            <p>Already a user?</p>
 
             <Link to="/login">
             <p className="text-blue-900 

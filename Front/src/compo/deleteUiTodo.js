@@ -1,6 +1,8 @@
 // import { useContext } from "react"
 // import { RefreshContext } from "./refreshContext"
 
+import { BACKEND_URL } from "../config"
+
 // export const deleteUiTodo =async function(todoId,{triggerRefresh}){
 export const deleteUiTodo =async function(todoId,triggerRefresh){
     const authToken=localStorage.getItem("authToken")
@@ -8,8 +10,8 @@ export const deleteUiTodo =async function(todoId,triggerRefresh){
     // const {triggerRefresh}=useContext(RefreshContext)
 
     try {
-        // const response = await fetch("http://localhost:3000/deleteTodo",{
-        const response = await fetch("https://tidy-todos.onrender.com/deleteTodo",{
+
+        const response = await fetch(`${BACKEND_URL}/deleteTodo`,{
             method:"POST",
             headers:{
                 "Content-Type": "application/json",

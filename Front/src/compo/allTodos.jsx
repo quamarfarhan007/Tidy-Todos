@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { getTodo } from "./getAllTodos"
 import { deleteUiTodo } from "./deleteUiTodo"
 import { useContext } from "react"
@@ -9,7 +9,6 @@ import { RefreshContext } from "./refreshContext"
 export const AllTodos = function () {
     const [allTodos,setAllTodos] = useState([])
 
-    const checklistRef= useRef([])
     const {refreshTrigger,triggerRefresh} = useContext(RefreshContext)
     useEffect(()=>{
         (async()=>{
@@ -20,7 +19,7 @@ export const AllTodos = function () {
 
     // console.log(allTodos)
     return <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 m-2">
-        {allTodos.map((value,index)=>(<SuballTodosUI
+        {allTodos.map((value)=>(<SuballTodosUI
             key={value._id}
             title={value.title}
             description={value.description}

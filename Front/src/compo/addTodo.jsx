@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { useState } from "react"
 import { RefreshContext } from "./refreshContext"
+import { BACKEND_URL } from "../config"
 export const Add = function ({inactivateAddButton}) {
 
     const {triggerRefresh} = useContext(RefreshContext)
@@ -11,8 +12,7 @@ export const Add = function ({inactivateAddButton}) {
     const addTodo =async function(title,description){
     const authToken=localStorage.getItem("authToken")
     try {
-        // const response = await fetch("http://localhost:3000/addTodo",{
-        const response = await fetch("https://tidy-todos.onrender.com/addTodo",{
+        const response = await fetch(`${BACKEND_URL}/addTodo`,{
             method:"POST",
             headers:{
                 "Content-Type": "application/json",

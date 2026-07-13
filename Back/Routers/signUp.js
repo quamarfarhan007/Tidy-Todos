@@ -27,6 +27,16 @@ signUpRouter.post("/signup",async (req,res)=>{
   const email=req.body.email
   const password=req.body.password
   const encyptedPass = await bcrypt.hash(password,5)
+
+  // try {
+  //     const doesUserExist =await userModel.exists({email:email})
+  //     if (doesUserExist) {
+  //     return res.status(409).json({ message: 'User already exists'});
+  //   }
+  // } catch (error) {
+  //   return res.status(400).json({message:"can not check if you are existng user or not "})
+  // }
+
   try {
       await userModel.create({
         email:email,
@@ -36,8 +46,13 @@ signUpRouter.post("/signup",async (req,res)=>{
       return res.json({message:"User Created Successfully"})
   } catch (error) {
     console.log(error)
+  // Catch the specific MongoDB duplicate key error!
+    if (error.code === 11000) {
+        return res.status(409).json({ message: 'User already exists' });
+    }
     return res.status(400).json({
-      message:error.message
+      // message:error.message
+      message:"an internal error occures while creating user"
     })
   }
 })
