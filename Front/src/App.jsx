@@ -4,6 +4,7 @@ import { SignUp } from './compo/signUp'
 import { Login } from './compo/login'
 import { Home } from './compo/home'
 import { ProtectedRoute } from './compo/ProtectedRoute'
+import { PublicRoute } from './compo/PublicRoute'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -12,8 +13,10 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route path='/' element={<Navigate to="/login" replace />} />
-      <Route path='/signup' element={<SignUp/>} ></Route>
-      <Route path='/login' element={<Login/>} ></Route>
+      <Route element={<PublicRoute/>}>
+        <Route path='/signup' element={<SignUp/>} ></Route>
+        <Route path='/login' element={<Login/>} ></Route>
+      </Route>
       <Route element={<ProtectedRoute/>}>
         <Route path='/home' element={<Home/>} ></Route>
       </Route>
